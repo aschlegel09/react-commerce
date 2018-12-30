@@ -7,9 +7,9 @@ import Blog from './components/Blog';
 import Product from './components/Product';
 import Button from './components/Button';
 import { Widget, addResponseMessage } from 'react-chat-widget';
-
+import Google from './components/GoogleLogin';
+import Facebook from './components/FacebookLogin';
 import 'react-chat-widget/lib/styles.css';
-
 import logo from './logo.svg';
 
 class App extends Component {
@@ -22,7 +22,45 @@ class App extends Component {
     // addResponseMessage(response);
   }
 
+  constructor() {
+    super();
+    this.state = { isAuthenticated: false, user: null, token: '' };
+  }
+
+  logout = () => {
+    this.setState({ isAuthenticated: false, token: '', user: null })
+  };
+
+  responseGoogle = (response) => {
+    console.log(response);
+}
+
+  onFailure = (error) => {
+    alert(error);
+  }
+
   render() {
+    let signInModal = !!this.state.isAuthenticated ?
+            (
+                <div>
+                    <p>Authenticated</p>
+                    <div>
+                        {this.state.user.email}
+                    </div>
+                    <div>
+                        <button onClick={this.logout} className="button">
+                            Log out
+                        </button>
+                    </div>
+                </div>
+            ) :
+            (
+                <div>
+                    <Facebook />
+                    <Google />
+                </div>
+            );
+
     return (
       <div className="App">
         <div>
@@ -35,6 +73,7 @@ class App extends Component {
             </div>
             <div className="col-md-9">
               <Container />
+              { signInModal }
               <div className="mt-2">
                 <Blog />
                 <Product />

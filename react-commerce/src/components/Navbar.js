@@ -1,13 +1,17 @@
 import React from "react";
+import { NavLink } from 'react-router-dom';
 
 function Navbar() {
     return (
         <div className="navbar z-depth-5 d-flex justify-content-between">
-        <div className="p-2 bd-highlight">
-            Flex Between
-        </div>
-                <a href="/" className="nav nav-link" data-hover="Match&rarr;&amp;&larr;Mix" data-active="Active!"><span>Mix&larr;&amp;&rarr;Match</span></a>
-                <p className="nav nav-item info">E-Commerce w/ React</p>
+            <NavLink to="/" className="p-2 bd-highlight">
+            E-Commerce w/ React
+            </NavLink>
+            <input className="form-control form-control-dark w-25" type="text" placeholder="Search Products" aria-label="Search" />
+            {/* <a href="/" className="nav nav-link" data-hover="Match&rarr;&amp;&larr;Mix" data-active="Active!"><span>Mix&larr;&amp;&rarr;Match</span></a> */}
+            <NavLink to="/google" className="nav nav-link">
+            Sign Out
+            </NavLink>
         </div>
     )
 };
