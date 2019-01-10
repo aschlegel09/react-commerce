@@ -3,13 +3,16 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const Data = require("./data");
+const dotenv = require('dotenv');
 
 const API_PORT = process.env.port || 3001;
 const app = express();
 const router = express.Router();
 
+dotenv.config();
+
 // this is our MongoDB database
-const dbRoute = "mongodb://aschlegel09:Spartan24!@ds145574.mlab.com:45574/e-commerce";
+let dbRoute = process.env.MONGOLAB_URI || 'mongodb://localhost/e-commerce';
 
 // connects our back end code with the database
 mongoose.connect(
